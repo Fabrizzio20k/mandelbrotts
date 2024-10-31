@@ -65,14 +65,18 @@ const Mandelbrot: React.FC = () => {
         }
 
         vec3 getColor(int iteration, int maxIterations) {
-          if (iteration == maxIterations) return vec3(0.0, 0.0, 0.0);
+            if (iteration == maxIterations) return vec3(0.0, 0.0, 0.0); // Fondo negro profundo
 
-          float t = float(iteration) / float(maxIterations);
-          float r = 0.5 + 0.5 * cos(3.0 + t * 5.0);
-          float g = 0.5 + 0.5 * cos(3.0 + t * 5.0 + 2.0);
-          float b = 0.5 + 0.5 * cos(3.0 + t * 5.0 + 4.0);
-          return vec3(r, g, b);
+            float t = float(iteration) / float(maxIterations);
+
+            // Gradiente de tonos verdes vibrantes
+            float r = 0.1 + 0.4 * cos(3.0 + t * 5.0);       // Tonos oscuros y tenues en rojo para resaltar el verde
+            float g = 0.3 + 0.7 * cos(3.0 + t * 6.0);       // Verde vibrante para estructuras
+            float b = 0.1 + 0.3 * cos(3.0 + t * 4.0 + 2.0); // Un toque de azul para dar profundidad
+
+            return vec3(r, g, b);
         }
+
 
         void main() {
           vec2 uv = (gl_FragCoord.xy / resolution.xy - 0.5) * 2.0;
